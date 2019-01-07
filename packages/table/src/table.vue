@@ -33,7 +33,8 @@
       class="el-table__body-wrapper"
       ref="bodyWrapper"
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
-      :style="[bodyHeight]">
+      :style="[bodyHeight]"
+      @click="bodyWrapperClickHandle">
       <table-body
         :context="context"
         :store="store"
@@ -322,6 +323,13 @@
     },
 
     methods: {
+      bodyWrapperClickHandle(e) {
+        console.log('bodyWrapperClickHandle e:', e);
+        const { headerWrapper, footerWrapper } = this.$refs;
+        if (headerWrapper) headerWrapper.scrollLeft += 10;
+        if (footerWrapper) footerWrapper.scrollLeft += 10;
+        this.scrollLeft += 10;
+      },
       getMigratingConfig() {
         return {
           events: {
